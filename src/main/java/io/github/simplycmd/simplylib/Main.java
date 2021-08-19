@@ -9,6 +9,7 @@ import io.github.simplycmd.simplylib.scheduler.ServerScheduler;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 
 public class Main implements ModInitializer {
@@ -22,8 +23,6 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         RRPCallback.EVENT.register(a -> a.add(RESOURCE_PACK));
-        ItemRegistry.register();
-        BlockRegistry.register();
         ExampleItemRegistry.register();
         ExampleBlockRegistry.register();
 
