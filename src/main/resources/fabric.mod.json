@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "simplylib",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "SimplyLib",
+  "description": "Some helpful code for my mods",
   "authors": [
-    "Me!"
+    "SimplyCmd"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://simplycmd.github.io/SimplyLib",
+    "sources": "https://github.com/SimplyCmd/SimplyLib"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "GNU-GPL-v3",
+  "icon": "assets/simplylib/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "io.github.simplycmd.simplylib.Main"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "simplylib.mixins.json"
   ],
 
   "depends": {
