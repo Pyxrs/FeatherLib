@@ -12,8 +12,10 @@ group = project.maven_group
 
 repositories {
 	mavenCentral()
+	maven { url("https://storage.googleapis.com/devan-maven/") }
 	maven {
-		url = uri("https://storage.googleapis.com/devan-maven/")
+		url("http://server.bbkr.space:8081/artifactory/libs-release")
+		allowInsecureProtocol(true)
 	}
 }
 
@@ -25,6 +27,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation include("net.devtech:arrp:${project.arrp_version}")
+	modImplementation("io.github.cottonmc.cotton:cotton:${project.cotton_version}")
 
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'

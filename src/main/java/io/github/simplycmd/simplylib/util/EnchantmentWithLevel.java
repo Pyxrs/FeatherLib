@@ -1,4 +1,4 @@
-package io.github.simplycmd.simplylib;
+package io.github.simplycmd.simplylib.util;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package io.github.simplycmd.simplylib;
+package io.github.simplycmd.simplylib.util;
 
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
