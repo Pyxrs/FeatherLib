@@ -4,6 +4,6 @@ import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 
 public class ClientScheduler extends Scheduler {
     public static void registerEvent() {
-        ClientTickCallback.EVENT.register((server) -> onTick());
+        ClientTickCallback.EVENT.register((client) -> onTick());
     }
 }

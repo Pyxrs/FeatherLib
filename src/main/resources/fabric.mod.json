@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.github.simplycmd.simplylib.Main"
+    ],
+    "client": [
+      "io.github.simplycmd.simplylib.Main"
     ]
   },
   "mixins": [

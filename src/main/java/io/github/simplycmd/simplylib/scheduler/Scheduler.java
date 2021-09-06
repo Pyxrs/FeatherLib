@@ -19,14 +19,15 @@ public abstract class Scheduler {
             currentTick = tasks.get(action);
 
             if (currentTick >= task.getValue()) {
+                action.run();
                 tasksMax.remove(action);
                 tasks.remove(action);
-                action.run();
             }
         }
     }
 
     public static void schedule(int tickDelay, Runnable action) {
-        tasks.put(action, tickDelay);
+        tasks.put(action, 0);
+        tasksMax.put(action, tickDelay);
     }
 }
