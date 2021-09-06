@@ -2,9 +2,8 @@ package io.github.simplycmd.simplylib.registry;
 
 import io.github.simplycmd.simplylib.Main;
 import net.devtech.arrp.json.models.JModel;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;

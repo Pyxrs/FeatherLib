@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Util {
-
+	// TODO: automatic mixin implementation
 	public static ConfiguredFeature<?, ?> registerFeature(String mod_id, String id, Integer chance, Feature<DefaultFeatureConfig> feature_class) {
 		// ALERT! ALERT! MAKE SURE TO ADD A MIXIN FOR THIS TO WORK! ALERT! ALERT! PLEASE SEE https://fabricmc.net/wiki/tutorial:features?rev=1599388928
 
@@ -35,17 +35,7 @@ public class Util {
 		return FEATURE_CONFIGURED;
 	}
 
-	/*public static ConfiguredFeature<?, ?> registerOverworldOre(String mod_id, String id, Block block, YOffset lowest, YOffset highest, Integer vein_size, Integer veins_per_chunk) {
-		ConfiguredFeature<?, ?> ORE = Feature.ORE
-				.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, block.getDefaultState(), vein_size))
-				.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(UniformHeightProvider.create(lowest, highest))))
-				.spreadHorizontally()
-				.repeat(veins_per_chunk);
-		RegistryKey<ConfiguredFeature<?, ?>> oreOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, new Identifier(mod_id, id));
-		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreOverworld.getValue(), ORE);
-		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreOverworld);
-		return ORE;
-	}*/
+	// TODO: registerOre
 
 	public static SoundEvent registerSound(String mod_id, String id) {
 		Identifier SOUND_ID = new Identifier(mod_id + ":" + id);

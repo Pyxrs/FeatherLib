@@ -7,9 +7,7 @@ import net.devtech.arrp.json.loot.JLootTable;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JPosition;
 
-import static net.devtech.arrp.api.RuntimeResourcePack.id;
 import static net.devtech.arrp.json.loot.JLootTable.*;
-import static net.devtech.arrp.json.loot.JLootTable.predicate;
 
 public class ARRPUtil {
     public static JLootTable lootTable(String blockId, BlockRegistrySettings.LootType type) {

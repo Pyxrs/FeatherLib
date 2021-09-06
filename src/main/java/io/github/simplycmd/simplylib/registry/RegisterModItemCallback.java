@@ -2,8 +2,6 @@ package io.github.simplycmd.simplylib.registry;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 
 import java.util.HashMap;
