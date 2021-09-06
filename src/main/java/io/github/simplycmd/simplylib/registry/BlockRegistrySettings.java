@@ -1,6 +1,7 @@
 package io.github.simplycmd.simplylib.registry;
 
 import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockRegistrySettings {
     public enum BlockstateType {
@@ -30,38 +31,16 @@ public class BlockRegistrySettings {
     @Getter
     LootType lootType;
 
-    public BlockRegistrySettings(String id, BlockstateType blockstateType, ItemModelType itemModelType, LootType lootType) {
+    public BlockRegistrySettings(String id, @Nullable BlockstateType blockstateType, @Nullable ItemModelType itemModelType, @Nullable LootType lootType) {
         this.id = id;
-        this.blockstateType = blockstateType;
-        this.itemModelType = itemModelType;
-        this.lootType = lootType;
-    }
 
-    public BlockRegistrySettings(String id, BlockstateType blockstateType, ItemModelType itemModelType) {
-        this.id = id;
-        this.blockstateType = blockstateType;
-        this.itemModelType = itemModelType;
-        this.lootType = LootType.NORMAL;
-    }
+        try { this.blockstateType = blockstateType; }
+        catch (NullPointerException n) { this.blockstateType = BlockstateType.NORMAL; }
 
-    public BlockRegistrySettings(String id, BlockstateType blockstateType) {
-        this.id = id;
-        this.blockstateType = blockstateType;
-        this.itemModelType = ItemModelType.NORMAL;
-        this.lootType = LootType.NORMAL;
-    }
+        try { this.itemModelType = itemModelType; }
+        catch (NullPointerException n) { this.itemModelType = ItemModelType.NORMAL; }
 
-    public BlockRegistrySettings(String id, LootType lootType) {
-        this.id = id;
-        this.blockstateType = BlockstateType.NORMAL;
-        this.itemModelType = ItemModelType.NORMAL;
-        this.lootType = lootType;
-    }
-
-    public BlockRegistrySettings(String id) {
-        this.id = id;
-        this.blockstateType = BlockstateType.NORMAL;
-        this.itemModelType = ItemModelType.NORMAL;
-        this.lootType = LootType.NORMAL;
+        try { this.lootType = lootType; }
+        catch (NullPointerException n) { this.lootType = LootType.NORMAL; }
     }
 }
