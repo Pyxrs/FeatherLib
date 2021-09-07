@@ -1,7 +1,5 @@
 package io.github.simplycmd.simplylib;
 
-import io.github.simplycmd.simplylib.registry.example.ExampleBlockRegistry;
-import io.github.simplycmd.simplylib.registry.example.ExampleItemRegistry;
 import io.github.simplycmd.simplylib.scheduler.ClientScheduler;
 import io.github.simplycmd.simplylib.scheduler.ServerScheduler;
 import net.devtech.arrp.api.RRPCallback;
