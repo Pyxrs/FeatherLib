@@ -1,5 +1,6 @@
 package io.github.simplycmd.simplylib.util;
 
+import io.github.simplycmd.simplylib.Main;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Util {
+
 	// TODO: automatic mixin implementation
 	public static ConfiguredFeature<?, ?> registerFeature(String mod_id, String id, Integer chance, Feature<DefaultFeatureConfig> feature_class) {
 		// ALERT! ALERT! MAKE SURE TO ADD A MIXIN FOR THIS TO WORK! ALERT! ALERT! PLEASE SEE https://fabricmc.net/wiki/tutorial:features?rev=1599388928

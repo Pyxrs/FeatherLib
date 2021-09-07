@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 
@@ -15,5 +16,5 @@ public interface RegisterModBlockCallback {
                 }
             });
 
-    void register(HashMap<BlockRegistrySettings, Block> blocks, HashMap<String, BlockItem> block_items);
+    void register(HashMap<BlockRegistrySettings, Block> blocks, HashMap<ID, SimplyLibBlockItem> block_items);
 }

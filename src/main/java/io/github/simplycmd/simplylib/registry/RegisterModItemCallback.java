@@ -3,6 +3,7 @@ package io.github.simplycmd.simplylib.registry;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 
@@ -14,5 +15,5 @@ public interface RegisterModItemCallback {
                 }
             });
 
-    void register(HashMap<String, Item> items);
+    void register(HashMap<ID, Item> items);
 }

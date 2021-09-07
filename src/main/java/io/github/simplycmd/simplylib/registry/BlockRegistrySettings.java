@@ -1,7 +1,10 @@
 package io.github.simplycmd.simplylib.registry;
 
 import lombok.Getter;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class BlockRegistrySettings {
     public enum BlockstateType {
@@ -20,7 +23,7 @@ public class BlockRegistrySettings {
     }
 
     @Getter
-    String id;
+    final ID id;
 
     @Getter
     BlockstateType blockstateType;
@@ -31,16 +34,28 @@ public class BlockRegistrySettings {
     @Getter
     LootType lootType;
 
-    public BlockRegistrySettings(String id, @Nullable BlockstateType blockstateType, @Nullable ItemModelType itemModelType, @Nullable LootType lootType) {
+    public BlockRegistrySettings(ID id) {
         this.id = id;
 
-        if (blockstateType != null) this.blockstateType = blockstateType;
-        else this.blockstateType = BlockstateType.NORMAL;
+        blockstateType = BlockstateType.NORMAL;
 
-        if (itemModelType != null) this.itemModelType = itemModelType;
-        else this.itemModelType = ItemModelType.NORMAL;
+        this.itemModelType = ItemModelType.NORMAL;
 
-        if (lootType != null) this.lootType = lootType;
-        else this.lootType = LootType.NORMAL;
+        this.lootType = LootType.NORMAL;
+    }
+
+    public BlockRegistrySettings blockstateType(BlockstateType blockstateType) {
+        this.blockstateType = blockstateType;
+        return this;
+    }
+
+    public BlockRegistrySettings itemModelType(ItemModelType itemModelType) {
+        this.itemModelType = itemModelType;
+        return this;
+    }
+
+    public BlockRegistrySettings lootType(LootType lootType) {
+        this.lootType = lootType;
+        return this;
     }
 }
