@@ -1,6 +1,7 @@
 package io.github.simplycmd.simplylib.registry;
 
 import io.github.simplycmd.simplylib.Main;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
@@ -24,11 +25,14 @@ public class BlockRegistry {
             Main.RESOURCE_PACK.addLootTable(new Identifier(block.getKey().getId().getNamespace(), "blocks/" + block.getKey().getId().getId()), ARRPUtil.blockLootTable(block.getKey().getId(), block.getKey().getLootType()));
         }
         for (Map.Entry<ID, SimplyLibBlockItem> item : blockItems.entrySet()) {
-            Registry.register(Registry.ITEM, item.getKey().getIdentifier(), new BlockItem(get(item.getValue().id()), item.getValue().settings()));
+            BlockItem blockItem = new BlockItem(get(item.getValue().getId()), item.getValue().getSettings());
+            item.getValue().setItem(blockItem);
+            Registry.register(Registry.ITEM, item.getKey().getIdentifier(), blockItem);
         }
     }
 
     public static Block get(ID blockId) {
+        // Needs to be a special iterator instead of getOrDefault() so that it correctly compares IDs
         if (blocks != null) {
             for (Map.Entry<BlockRegistrySettings, Block> block : blocks.entrySet()) {
                 if (checkIfIDsEqual(blockId, block.getKey().getId())) {
@@ -43,8 +47,8 @@ public class BlockRegistry {
     public static BlockItem getBlockItem(ID itemId) {
         if (blockItems != null) {
             for (Map.Entry<ID, SimplyLibBlockItem> item : blockItems.entrySet()) {
-                if (item.getKey().equals(itemId)) {
-                    return new BlockItem(get(item.getValue().id()), item.getValue().settings());
+                if (checkIfIDsEqual(itemId, item.getKey())) {
+                    return item.getValue().getItem();
                 }
             }
             return (BlockItem) Blocks.AIR.asItem();
