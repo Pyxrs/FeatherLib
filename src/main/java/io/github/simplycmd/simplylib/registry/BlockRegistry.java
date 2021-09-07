@@ -36,7 +36,7 @@ public class BlockRegistry {
                     return block.getValue();
                 }
             }
-            throw new IllegalArgumentException("Block not valid!");
+            throw new IllegalArgumentException("Block with ID " + blockId + " not valid!");
         } else {
             return Blocks.AIR;
         }
@@ -49,7 +49,7 @@ public class BlockRegistry {
                     return item.getValue();
                 }
             }
-            throw new IllegalArgumentException("Block not valid!");
+            throw new IllegalArgumentException("BlockItem with ID " + itemId + " not valid!");
         } else {
             return (BlockItem) Blocks.AIR.asItem();
         }

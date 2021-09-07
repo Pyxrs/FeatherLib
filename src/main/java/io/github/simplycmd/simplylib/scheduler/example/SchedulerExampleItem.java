@@ -15,7 +15,7 @@ public class SchedulerExampleItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ServerScheduler.schedule(100, () -> System.out.println("Printed 100 ticks or 5 seconds later"));
-        return TypedActionResult.success(user.getStackInHand(hand));
+        ServerScheduler.schedule(100, (id) -> System.out.println("Task with ID: " + id + " printed 100 ticks or 5 seconds later"));
+        return TypedActionResult.consume(user.getStackInHand(hand));
     }
 }

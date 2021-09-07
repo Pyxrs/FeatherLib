@@ -1,33 +1,37 @@
 package io.github.simplycmd.simplylib.scheduler;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
+import java.util.function.Consumer;
 
 public abstract class Scheduler {
-    private static HashMap<Runnable, Integer> tasksMax = new HashMap<>();
-    private static HashMap<Runnable, Integer> tasks = new HashMap<>();
+    private static final Random RANDOM = new Random();
+    private static HashMap<Integer, SchedulerInfoContainer> tasks = new HashMap<>();
 
     public static void registerEvent() {
     }
 
     protected static void onTick() {
-        for (Map.Entry<Runnable, Integer> task : tasksMax.entrySet()) {
-            Runnable action = task.getKey();
-            int currentTick = tasks.get(action);
+        Iterator<Map.Entry<Integer, SchedulerInfoContainer>> iterator = tasks.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, SchedulerInfoContainer> task = iterator.next();
+            SchedulerInfoContainer container = task.getValue();
 
-            tasks.replace(action, currentTick + 1);
-            currentTick = tasks.get(action);
+            container.currentTick++;
 
-            if (currentTick >= task.getValue()) {
-                action.run();
-                tasksMax.remove(action);
-                tasks.remove(action);
+            if (container.currentTick >= container.getMaxTicks()) {
+                container.getAction().accept(task.getKey());
+                iterator.remove();
             }
         }
     }
 
-    public static void schedule(int tickDelay, Runnable action) {
-        tasks.put(action, 0);
-        tasksMax.put(action, tickDelay);
+    public static void schedule(int tickDelay, Consumer<Integer> action) {
+        int id = RANDOM.nextInt();
+        while (tasks.containsKey(id)) id = RANDOM.nextInt();
+
+        tasks.put(id, new SchedulerInfoContainer(tickDelay, action));
     }
 }

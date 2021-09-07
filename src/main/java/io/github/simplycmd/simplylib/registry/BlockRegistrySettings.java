@@ -34,13 +34,13 @@ public class BlockRegistrySettings {
     public BlockRegistrySettings(String id, @Nullable BlockstateType blockstateType, @Nullable ItemModelType itemModelType, @Nullable LootType lootType) {
         this.id = id;
 
-        try { this.blockstateType = blockstateType; }
-        catch (NullPointerException n) { this.blockstateType = BlockstateType.NORMAL; }
+        if (blockstateType != null) this.blockstateType = blockstateType;
+        else this.blockstateType = BlockstateType.NORMAL;
 
-        try { this.itemModelType = itemModelType; }
-        catch (NullPointerException n) { this.itemModelType = ItemModelType.NORMAL; }
+        if (itemModelType != null) this.itemModelType = itemModelType;
+        else this.itemModelType = ItemModelType.NORMAL;
 
-        try { this.lootType = lootType; }
-        catch (NullPointerException n) { this.lootType = LootType.NORMAL; }
+        if (lootType != null) this.lootType = lootType;
+        else this.lootType = LootType.NORMAL;
     }
 }
