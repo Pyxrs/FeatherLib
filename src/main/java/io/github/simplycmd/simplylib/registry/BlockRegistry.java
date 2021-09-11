@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class BlockRegistry {
     private static HashMap<BlockRegistrySettings, Block> blocks = new HashMap<>();
-    private static HashMap<ID, SimplyLibBlockItem> blockItems = new HashMap<>();
+    private static HashMap<ID, BlockItem> blockItems = new HashMap<>();
 
     public static void register() {
         RegisterModBlockCallback.EVENT.invoker().register(blocks, blockItems);
@@ -24,10 +24,8 @@ public class BlockRegistry {
             Main.RESOURCE_PACK.addModel(ARRPUtil.model(block.getKey().getId(), block.getKey().getItemModelType()), new Identifier(block.getKey().getId().getNamespace(), "item/" + block.getKey().getId().getId()));
             Main.RESOURCE_PACK.addLootTable(new Identifier(block.getKey().getId().getNamespace(), "blocks/" + block.getKey().getId().getId()), ARRPUtil.blockLootTable(block.getKey().getId(), block.getKey().getLootType()));
         }
-        for (Map.Entry<ID, SimplyLibBlockItem> item : blockItems.entrySet()) {
-            BlockItem blockItem = new BlockItem(get(item.getValue().getId()), item.getValue().getSettings());
-            item.getValue().setItem(blockItem);
-            Registry.register(Registry.ITEM, item.getKey().getIdentifier(), blockItem);
+        for (Map.Entry<ID, BlockItem> item : blockItems.entrySet()) {
+            Registry.register(Registry.ITEM, item.getKey().getIdentifier(), item.getValue());
         }
     }
 
@@ -46,9 +44,9 @@ public class BlockRegistry {
 
     public static BlockItem getBlockItem(ID itemId) {
         if (blockItems != null) {
-            for (Map.Entry<ID, SimplyLibBlockItem> item : blockItems.entrySet()) {
+            for (Map.Entry<ID, BlockItem> item : blockItems.entrySet()) {
                 if (checkIfIDsEqual(itemId, item.getKey())) {
-                    return item.getValue().getItem();
+                    return item.getValue();
                 }
             }
             return (BlockItem) Blocks.AIR.asItem();

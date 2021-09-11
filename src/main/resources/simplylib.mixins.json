@@ -6,10 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "PostModInitializerClientMixin"
   ],
   "server": [
-    "PostModInitializerServerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

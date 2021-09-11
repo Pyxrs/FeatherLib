@@ -16,5 +16,5 @@ public interface RegisterModBlockCallback {
                 }
             });
 
-    void register(HashMap<BlockRegistrySettings, Block> blocks, HashMap<ID, SimplyLibBlockItem> block_items);
+    void register(HashMap<BlockRegistrySettings, Block> blocks, HashMap<ID, BlockItem> block_items);
 }
