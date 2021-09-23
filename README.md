@@ -1,5 +1,6 @@
-# SimplyLib
+# SimplyLib [Currently not working]
 
+Requires a rewrite
 Some helpful codes for my mods
 
 ## Adding to your project:
