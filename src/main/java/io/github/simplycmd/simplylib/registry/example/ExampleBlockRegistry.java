@@ -17,10 +17,10 @@ public class ExampleBlockRegistry {
     public static final Block BLOCK = new Block(FabricBlockSettings.of(Material.STONE));
 
     public static void register() {
-        RegisterModBlockCallback.EVENT.register((blocks, block_items) -> {
-            blocks.put(new BlockRegistrySettings(ID("simplylib_block")).itemModelType(BlockRegistrySettings.ItemModelType.NORMAL), BLOCK);
+        RegisterModBlockCallback.EVENT.register(() -> {
+            BlockRegistry.blocks.put(new BlockRegistrySettings(ID("simplylib_block")).itemModelType(BlockRegistrySettings.ItemModelType.NORMAL), BLOCK);
 
-            block_items.put(ID("simplylib_block"), new BlockItem(BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
+            BlockRegistry.blockItems.put(ID("simplylib_block"), new BlockItem(BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
         });
     }
 

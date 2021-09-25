@@ -14,15 +14,15 @@ public abstract class Scheduler {
     }
 
     protected static void onTick() {
-        Iterator<Map.Entry<Integer, SchedulerInfoContainer>> iterator = tasks.entrySet().iterator();
+        Iterator<Integer> iterator = tasks.keySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Integer, SchedulerInfoContainer> task = iterator.next();
-            SchedulerInfoContainer container = task.getValue();
+            Integer task = iterator.next();
+            SchedulerInfoContainer container = tasks.get(task);
 
             container.currentTick++;
 
             if (container.currentTick >= container.getMaxTicks()) {
-                container.getAction().accept(task.getKey());
+                container.getAction().accept(task);
                 iterator.remove();
             }
         }
