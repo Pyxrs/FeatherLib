@@ -10,11 +10,11 @@ import java.util.HashMap;
 
 public interface RegisterModBlockCallback {
     Event<RegisterModBlockCallback> EVENT = EventFactory.createArrayBacked(RegisterModBlockCallback.class,
-            (listeners) -> (blocks, block_items) -> {
+            (listeners) -> () -> {
                 for (RegisterModBlockCallback listener : listeners) {
-                    listener.register(blocks, block_items);
+                    listener.register();
                 }
             });
 
-    void register(HashMap<BlockRegistrySettings, Block> blocks, HashMap<ID, BlockItem> block_items);
+    void register();
 }

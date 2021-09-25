@@ -13,10 +13,10 @@ import java.util.Map;
 import static net.devtech.arrp.json.models.JModel.model;
 
 public class ItemRegistry {
-    private static HashMap<ID, Item> items = new HashMap<>();
+    public static HashMap<ID, Item> items = new HashMap<>();
 
     public static void register() {
-        RegisterModItemCallback.EVENT.invoker().register(items);
+        RegisterModItemCallback.EVENT.invoker().register();
 
         for (Map.Entry<ID, Item> item : items.entrySet()) {
             Registry.register(Registry.ITEM, item.getKey().getIdentifier(), item.getValue());

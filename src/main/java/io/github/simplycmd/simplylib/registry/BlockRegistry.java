@@ -1,6 +1,7 @@
 package io.github.simplycmd.simplylib.registry;
 
 import io.github.simplycmd.simplylib.Main;
+import lombok.Getter;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,11 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BlockRegistry {
-    private static HashMap<BlockRegistrySettings, Block> blocks = new HashMap<>();
-    private static HashMap<ID, BlockItem> blockItems = new HashMap<>();
+    public static HashMap<BlockRegistrySettings, Block> blocks = new HashMap<>();
+    public static HashMap<ID, BlockItem> blockItems = new HashMap<>();
 
     public static void register() {
-        RegisterModBlockCallback.EVENT.invoker().register(blocks, blockItems);
+        RegisterModBlockCallback.EVENT.invoker().register();
 
         for (Map.Entry<BlockRegistrySettings, Block> block : blocks.entrySet()) {
             Registry.register(Registry.BLOCK, block.getKey().getId().getIdentifier(), block.getValue());
