@@ -15,9 +15,17 @@ import java.util.Map;
 public class BlockRegistry {
     public static HashMap<BlockRegistrySettings, Block> blocks = new HashMap<>();
     public static HashMap<ID, BlockItem> blockItems = new HashMap<>();
+    private static boolean initialRegistry = true;
 
     public static void register() {
-        RegisterModBlockCallback.EVENT.invoker().register();
+        // Handle multiple mods using SimplyLib at once without registering twice
+        if (!initialRegistry) {
+            blocks.clear();
+            blockItems.clear();
+        }
+        initialRegistry = false;
+
+        RegisterModBlockCallback.EVENT.invoker().register(blocks, blockItems);
 
         for (Map.Entry<BlockRegistrySettings, Block> block : blocks.entrySet()) {
             Registry.register(Registry.BLOCK, block.getKey().getId().getIdentifier(), block.getValue());

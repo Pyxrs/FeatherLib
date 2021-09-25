@@ -14,9 +14,15 @@ import static net.devtech.arrp.json.models.JModel.model;
 
 public class ItemRegistry {
     public static HashMap<ID, Item> items = new HashMap<>();
+    private static boolean initialRegistry = true;
 
     public static void register() {
-        RegisterModItemCallback.EVENT.invoker().register();
+        // Handle multiple mods using SimplyLib at once without registering twice
+        if (!initialRegistry)
+            items.clear();
+        initialRegistry = false;
+
+        RegisterModItemCallback.EVENT.invoker().register(items);
 
         for (Map.Entry<ID, Item> item : items.entrySet()) {
             Registry.register(Registry.ITEM, item.getKey().getIdentifier(), item.getValue());

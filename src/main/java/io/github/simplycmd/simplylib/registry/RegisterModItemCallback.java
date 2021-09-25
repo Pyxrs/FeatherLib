@@ -9,11 +9,11 @@ import java.util.HashMap;
 
 public interface RegisterModItemCallback {
     Event<RegisterModItemCallback> EVENT = EventFactory.createArrayBacked(RegisterModItemCallback.class,
-            (listeners) -> () -> {
+            (listeners) -> (items) -> {
                 for (RegisterModItemCallback listener : listeners) {
-                    listener.register();
+                    listener.register(items);
                 }
             });
 
-    void register();
+    void register(HashMap<ID, Item> items);
 }
