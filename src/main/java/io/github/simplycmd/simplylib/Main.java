@@ -8,7 +8,6 @@ import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
 
 public class Main implements ModInitializer, ClientModInitializer {
     public static String MOD_ID = "simplylib";
@@ -22,11 +21,13 @@ public class Main implements ModInitializer, ClientModInitializer {
         ServerScheduler.registerEvent();
 
         // ---------- What you should do ---------- //
-        //ExampleItemRegistry.register();
-        //ExampleBlockRegistry.register();
+        // ExampleItemRegistry.register();
+        // ExampleBlockRegistry.register();
     }
 
     @Override
     public void onInitializeClient() {
+        // ---------- What you should do ---------- //
+
     }
 }

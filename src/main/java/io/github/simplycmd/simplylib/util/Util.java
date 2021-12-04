@@ -1,6 +1,5 @@
 package io.github.simplycmd.simplylib.util;
 
-import io.github.simplycmd.simplylib.Main;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -8,8 +7,10 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -39,6 +40,7 @@ public class Util {
 
 	// TODO: registerOre
 
+	// Easily register a sound
 	public static SoundEvent registerSound(String mod_id, String id) {
 		Identifier SOUND_ID = new Identifier(mod_id + ":" + id);
 		SoundEvent SOUND = new SoundEvent(SOUND_ID);
@@ -46,6 +48,7 @@ public class Util {
 		return SOUND;
 	}
 
+	// Easily spawn an arrow
 	public static ArrowEntity initArrow(Item arrow, Potion potion, Vec3d pos, float speed, Vec3d direction, PersistentProjectileEntity.PickupPermission pickupPermission, World world) {
 		// Create arrow
 		ArrowEntity arrowEntity = new ArrowEntity(world, pos.getX(), pos.getY(), pos.getZ());
@@ -55,6 +58,7 @@ public class Util {
 		return arrowEntity;
 	}
 
+	// For downloading images and converting them to NativeBackedTextures
 	public static NativeImageBackedTexture imageFromURL(URL url, int width, int height) {
 		NativeImage image = null;
 		try {
@@ -64,7 +68,6 @@ public class Util {
 		}
 		return new NativeImageBackedTexture(parseImage(image, width, height));
 	}
-
 	private static NativeImage parseImage(NativeImage image, int width, int height) {
 		int imageSrcWidth = image.getWidth();
 		int srcHeight = image.getHeight();
@@ -82,5 +85,10 @@ public class Util {
 		}
 		image.close();
 		return imgNew;
+	}
+
+	// Simplified teleport
+	public static void teleport(ServerPlayerEntity player, BlockPos position) {
+		player.teleport(player.getServerWorld(), position.getX(), position.getY(), position.getZ(), 0, 0);
 	}
 }
