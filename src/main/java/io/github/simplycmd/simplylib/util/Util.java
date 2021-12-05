@@ -12,31 +12,25 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class Util {
 
+	// REMOVED BECAUSE 1.18
 	// TODO: automatic mixin implementation
-	public static ConfiguredFeature<?, ?> registerFeature(String mod_id, String id, Integer chance, Feature<DefaultFeatureConfig> feature_class) {
-		// ALERT! ALERT! MAKE SURE TO ADD A MIXIN FOR THIS TO WORK! ALERT! ALERT! PLEASE SEE https://fabricmc.net/wiki/tutorial:features?rev=1599388928
+	//public static ConfiguredFeature<?, ?> registerFeature(String mod_id, String id, Integer chance, Feature<DefaultFeatureConfig> feature_class) {
+	//	// ALERT! ALERT! MAKE SURE TO ADD A MIXIN FOR THIS TO WORK! ALERT! ALERT! PLEASE SEE https://fabricmc.net/wiki/tutorial:features?rev=1599388928
 
-		Registry.register(Registry.FEATURE, new Identifier(mod_id, id), feature_class);
-		ConfiguredFeature<?, ?> FEATURE_CONFIGURED = feature_class.configure(FeatureConfig.DEFAULT).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(chance)));
-		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(mod_id, id), FEATURE_CONFIGURED);
+	//	Registry.register(Registry.FEATURE, new Identifier(mod_id, id), feature_class);
+	//	ConfiguredFeature<?, ?> FEATURE_CONFIGURED = feature_class.configure(FeatureConfig.DEFAULT).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(chance)));
+	//	Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(mod_id, id), FEATURE_CONFIGURED);
 
-		return FEATURE_CONFIGURED;
-	}
+	//	return FEATURE_CONFIGURED;
+	//}
 
 	// TODO: registerOre
 
@@ -80,7 +74,7 @@ public class Util {
 		NativeImage imgNew = new NativeImage(width, height, true);
 		for (int x = 0; x < imageSrcWidth; x++) {
 			for (int y = 0; y < srcHeight; y++) {
-				imgNew.setPixelColor(x, y, image.getPixelColor(x, y));
+				imgNew.setColor(x, y, image.getColor(x, y));
 			}
 		}
 		image.close();
@@ -89,6 +83,6 @@ public class Util {
 
 	// Simplified teleport
 	public static void teleport(ServerPlayerEntity player, BlockPos position) {
-		player.teleport(player.getServerWorld(), position.getX(), position.getY(), position.getZ(), 0, 0);
+		player.teleport(player.getWorld(), (float) position.getX(), (float) position.getY(), (float) position.getZ(), 0, 0);
 	}
 }
