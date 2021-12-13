@@ -1,5 +1,7 @@
 package io.github.simplycmd.simplylib;
 
+import java.util.ArrayList;
+
 import io.github.simplycmd.simplylib.registry.example.ExampleBlockRegistry;
 import io.github.simplycmd.simplylib.registry.example.ExampleItemRegistry;
 import io.github.simplycmd.simplylib.scheduler.ClientScheduler;
@@ -30,4 +32,19 @@ public class Main implements ModInitializer, ClientModInitializer {
         // ---------- What you should do ---------- //
 
     }
+
+    private static ArrayList<Runnable> tasks = new ArrayList<>();
+
+    // Call this to add a delayed task
+	public static void delay(Runnable task) {
+		tasks.add(task);
+	}
+
+	public static void postInit() {
+		// Runs after the normal fabric server is initialized
+		for (Runnable task : tasks) {
+			task.run();
+		}
+		tasks.clear();
+	}
 }

@@ -4,6 +4,7 @@
   "package": "io.github.simplycmd.simplylib.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "LateServerRegistryMixin"
   ],
   "client": [
   ],
