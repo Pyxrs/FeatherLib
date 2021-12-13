@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     //...
-    include modImplementation("curse.maven:simplylib-525225:3549894")
+    include modImplementation("curse.maven:simplylib-525225:3564452")
     include modImplementation("net.devtech:arrp:0.5.3")
 }
 ```
