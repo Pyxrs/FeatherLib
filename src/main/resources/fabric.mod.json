@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "simplylib",
+  "id": "featherlib",
   "version": "${version}",
 
-  "name": "SimplyLib",
+  "name": "FeatherLib",
   "description": "Some helpful code for my mods",
   "authors": [
     "SimplyCmd"
   ],
   "contact": {
-    "homepage": "https://simplycmd.github.io/SimplyLib",
-    "sources": "https://github.com/SimplyCmd/SimplyLib"
+    "homepage": "https://simplycmd.github.io/FeatherLib",
+    "sources": "https://github.com/SimplyCmd/FeatherLib"
   },
 
-  "license": "GNU-GPL-v3",
-  "icon": "assets/simplylib/icon.png",
+  "license": "MIT",
+  "icon": "assets/featherlib/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.simplycmd.simplylib.Main"
+      "io.github.simplycmd.featherlib.FeatherLib"
     ],
     "client": [
-      "io.github.simplycmd.simplylib.Main"
+      "io.github.simplycmd.featherlib.FeatherLib"
     ]
   },
   "mixins": [
-    "simplylib.mixins.json"
+    "featherlib.mixins.json"
   ],
 
   "depends": {
