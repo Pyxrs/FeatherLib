@@ -1,6 +1,6 @@
 package io.github.simplycmd.featherlib.scheduler;
 
-import net.fabricmc.fabric.api.event.client.ClientTickCallback;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -11,7 +11,7 @@ public class ClientScheduler {
     private static HashMap<Integer, SchedulerInfoContainer> tasks = new HashMap<>();
 
     public static void registerEvent() {
-        ClientTickCallback.EVENT.register((server) -> onTick());
+        ClientTickEvents.END_CLIENT_TICK.register((server) -> onTick());
     }
 
     protected static void onTick() {

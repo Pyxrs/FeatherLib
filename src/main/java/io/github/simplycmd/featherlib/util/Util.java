@@ -21,8 +21,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.simplycmd.featherlib.registry.ID;
-
 public class Util {
 
 	// REMOVED BECAUSE 1.18
@@ -40,8 +38,8 @@ public class Util {
 	// TODO: registerOre
 
 	// Easily register a sound
-	public static SoundEvent registerSound(ID id) {
-		Identifier SOUND_ID = new Identifier(id.getNamespace() + ":" + id.getId());
+	public static SoundEvent registerSound(Identifier id) {
+		Identifier SOUND_ID = new Identifier(id.getNamespace() + ":" + id.getPath());
 		SoundEvent SOUND = new SoundEvent(SOUND_ID);
 		Registry.register(Registry.SOUND_EVENT, SOUND_ID, SOUND);
 		return SOUND;

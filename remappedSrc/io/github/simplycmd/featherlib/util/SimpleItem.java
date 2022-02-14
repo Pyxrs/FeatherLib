@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
-import io.github.simplycmd.featherlib.registry.ID;
+import io.github.simplycmd.featherlib.registry.Identifier;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -18,16 +18,16 @@ import net.minecraft.world.World;
 public class SimpleItem extends Item {
     private final Optional<List<Text>> tooltip;
 
-    public SimpleItem(ID itemId, FabricItemSettings settings) {
+    public SimpleItem(Identifier itemId, FabricItemSettings settings) {
         super(settings);
         this.tooltip = Optional.empty();
-        Registry.register(Registry.ITEM, new Identifier(itemId.getNamespace(), itemId.getId()), new Item(settings));
+        Registry.register(Registry.ITEM, new Identifier(itemId.getNamespace(), itemId.getPath()), new Item(settings));
     }
 
-    public SimpleItem(ID itemId, FabricItemSettings settings, List<Text> tooltip) {
+    public SimpleItem(Identifier itemId, FabricItemSettings settings, List<Text> tooltip) {
         super(settings);
         this.tooltip = Optional.of(tooltip);
-        Registry.register(Registry.ITEM, new Identifier(itemId.getNamespace(), itemId.getId()), new Item(settings));
+        Registry.register(Registry.ITEM, new Identifier(itemId.getNamespace(), itemId.getPath()), new Item(settings));
     }
 
     @Override

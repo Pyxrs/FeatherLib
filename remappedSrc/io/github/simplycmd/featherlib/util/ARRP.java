@@ -7,29 +7,29 @@ import net.devtech.arrp.json.models.JPosition;
 
 import static net.devtech.arrp.json.loot.JLootTable.*;
 
-import io.github.simplycmd.featherlib.registry.ID;
+import io.github.simplycmd.featherlib.registry.Identifier;
 
 public class ARRP {
-    public static JLootTable defaultBlockLootTable(ID blockId) {
+    public static JLootTable defaultBlockLootTable(Identifier blockId) {
         return loot("minecraft:block")
             .pool(pool()
                 .rolls(1)
                 .entry(entry()
                     .type("minecraft:item")
-                    .name(blockId.getNamespace() + ":" + blockId.getId()))
+                    .name(blockId.getNamespace() + ":" + blockId.getPath()))
                 .condition(predicate("minecraft:survives_explosion")));
     }
 
-    public static JState defaultBlockstate(ID blockId) {
-        return JState.state(JState.variant(JState.model(blockId.getNamespace() + ":block/" + blockId.getId())));
+    public static JState defaultBlockstate(Identifier blockId) {
+        return JState.state(JState.variant(JState.model(blockId.getNamespace() + ":block/" + blockId.getPath())));
     }
 
-    public static JModel textureItemModel(ID blockId) {
-        return JModel.model().parent("minecraft:item/generated").textures(JModel.textures().layer0(blockId.getNamespace() + ":item/" + blockId.getId()));
+    public static JModel textureItemModel(Identifier blockId) {
+        return JModel.model().parent("minecraft:item/generated").textures(JModel.textures().layer0(blockId.getNamespace() + ":item/" + blockId.getPath()));
     }
 
-    public static JModel blockItemModel(ID blockId) {
-        return JModel.model().parent(blockId.getNamespace() + ":block/" + blockId.getId()).display(JModel.display()
+    public static JModel blockItemModel(Identifier blockId) {
+        return JModel.model().parent(blockId.getNamespace() + ":block/" + blockId.getPath()).display(JModel.display()
             .setGui(new JPosition().rotation(30, 45, 0).scale(0.625f, 0.625f, 0.625f))
             .setGround(new JPosition().translation(0, 3, 0).scale(0.25f, 0.25f, 0.25f))
             .setHead(new JPosition().rotation(0, 180, 0).scale(1, 1, 1))
