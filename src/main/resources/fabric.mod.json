@@ -19,10 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.simplycmd.featherlib.FeatherLib"
+      "com.simplycmd.featherlib.FeatherLib"
     ],
     "client": [
-      "io.github.simplycmd.featherlib.FeatherLib"
+      "com.simplycmd.featherlib.FeatherLib"
     ]
   },
   "mixins": [
