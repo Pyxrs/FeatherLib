@@ -6,7 +6,11 @@ import net.devtech.arrp.json.blockstate.JState;
 import net.devtech.arrp.json.loot.JLootTable;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JPosition;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import static net.devtech.arrp.json.loot.JLootTable.*;
 
@@ -20,31 +24,37 @@ public class Resources {
         RRPCallback.BEFORE_VANILLA.register(a -> a.add(RESOURCE_PACK));
     }
 
-    public static JLootTable registerDefaultBlockLootTable(Identifier blockId) {
+    public static JLootTable defaultBlockLootTable(Block block, BlockItem item) {
+        final Identifier blockId = Registry.BLOCK.getId(block);
+        final Identifier itemId = Registry.ITEM.getId(item);
         final JLootTable loot = loot("minecraft:block")
             .pool(pool()
                 .rolls(1)
                 .entry(entry()
                     .type("minecraft:item")
-                    .name(blockId.getNamespace() + ":" + blockId.getPath()))
+                    .name(itemId.toString()))
                 .condition(predicate("minecraft:survives_explosion")));
         Resources.RESOURCE_PACK.addLootTable(new Identifier(blockId.getNamespace(), "blocks/" + blockId.getPath()), loot);
         return loot;
     }
 
-    public static JState registerDefaultBlockstate(Identifier blockId) {
-        final JState state = JState.state(JState.variant(JState.model(blockId.getNamespace() + ":block/" + blockId.getPath())));
-        Resources.RESOURCE_PACK.addBlockState(state, blockId);
+    public static JState defaultBlockstate(Block block) {
+        final Identifier id = Registry.BLOCK.getId(block);
+        final JState state = JState.state(JState.variant(JState.model(id.getNamespace() + ":block/" + id.getPath())));
+        Resources.RESOURCE_PACK.addBlockState(state, id);
         return state;
     }
 
-    public static JModel registerTextureItemModel(Identifier blockId) {
-        final JModel model = JModel.model().parent("minecraft:item/generated").textures(JModel.textures().layer0(blockId.getNamespace() + ":item/" + blockId.getPath()));
-        Resources.RESOURCE_PACK.addModel(model, new Identifier(blockId.getNamespace(), "item/" + blockId.getPath()));
+    public static JModel textureItemModel(Item item) {
+        final Identifier id = Registry.ITEM.getId(item);
+        final JModel model = JModel.model().parent("minecraft:item/generated").textures(JModel.textures().layer0(id.getNamespace() + ":item/" + id.getPath()));
+        Resources.RESOURCE_PACK.addModel(model, new Identifier(id.getNamespace(), "item/" + id.getPath()));
         return model;
     }
 
-    public static JModel registerBlockItemModel(Identifier blockId) {
+    public static JModel blockItemModel(Block block, BlockItem item) {
+        final Identifier blockId = Registry.BLOCK.getId(block);
+        final Identifier itemId = Registry.ITEM.getId(item);
         final JModel model = JModel.model().parent(blockId.getNamespace() + ":block/" + blockId.getPath()).display(JModel.display()
             .setGui(new JPosition().rotation(30, 45, 0).scale(0.625f, 0.625f, 0.625f))
             .setGround(new JPosition().translation(0, 3, 0).scale(0.25f, 0.25f, 0.25f))
@@ -53,7 +63,7 @@ public class Resources {
             .setThirdperson_righthand(new JPosition().rotation(75, 315, 0).translation(0, 2.5f, 0).scale(0.375f, 0.375f, 0.375f))
             .setFirstperson_righthand(new JPosition().rotation(0, 315, 0).scale(0.4f, 0.4f, 0.4f))
         );
-        Resources.RESOURCE_PACK.addModel(model, new Identifier(blockId.getNamespace(), "item/" + blockId.getPath()));
+        Resources.RESOURCE_PACK.addModel(model, new Identifier(itemId.getNamespace(), "item/" + itemId.getPath()));
         return model;
     }
 }

@@ -33,9 +33,32 @@ public class SimpleBlock {
     public enum ItemModel {
         NONE,
         BLOCK,
-        ITEM
+        ITEM,
+    }
+    public enum LootTable {
+        NONE,
+        DEFAULT,
     }
 
+    public SimpleBlock withItem(ItemModel model, LootTable table, Function<Block, BlockItem> item) {
+        this.item = Optional.of(item.apply(block));
+        Registry.register(Registry.ITEM, id, this.item.get());
+        switch (model) {
+            case NONE:
+                break;
+            case BLOCK:
+                Resources.blockItemModel(this.getBlock(), this.getItem().get());
+            case ITEM:
+                Resources.textureItemModel(this.getItem().get());
+        }
+        switch (table) {
+            case NONE:
+                break;
+            case DEFAULT:
+                Resources.defaultBlockLootTable(this.getBlock(), this.getItem().get());
+        }
+        return this;
+    }
     public SimpleBlock withItem(ItemModel model, Function<Block, BlockItem> item) {
         this.item = Optional.of(item.apply(block));
         Registry.register(Registry.ITEM, id, this.item.get());
@@ -43,20 +66,31 @@ public class SimpleBlock {
             case NONE:
                 break;
             case BLOCK:
-                Resources.registerBlockItemModel(id);
+                Resources.blockItemModel(this.getBlock(), this.getItem().get());
             case ITEM:
-                Resources.registerTextureItemModel(id);
+                Resources.textureItemModel(this.getItem().get());
         }
+        return this;
+    }
+    public SimpleBlock withItem(LootTable table, Function<Block, BlockItem> item) {
+        this.item = Optional.of(item.apply(block));
+        Registry.register(Registry.ITEM, id, this.item.get());
+        switch (table) {
+            case NONE:
+                break;
+            case DEFAULT:
+                Resources.defaultBlockLootTable(this.getBlock(), this.getItem().get());
+        }
+        return this;
+    }
+    public SimpleBlock withItem(Function<Block, BlockItem> item) {
+        this.item = Optional.of(item.apply(block));
+        Registry.register(Registry.ITEM, id, this.item.get());
         return this;
     }
 
     public SimpleBlock defaultBlockstate() {
-        Resources.registerDefaultBlockstate(id);
-        return this;
-    }
-
-    public SimpleBlock defaultLootTable() {
-        Resources.registerDefaultBlockLootTable(id);
+        Resources.defaultBlockstate(this.getBlock());
         return this;
     }
 }

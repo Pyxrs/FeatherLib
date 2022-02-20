@@ -20,4 +20,9 @@ public class SimpleItem {
     public Item getItem() {
         return item;
     }
+
+    public SimpleItem defaultItemModel() {
+        Resources.textureItemModel(this.getItem());
+        return this;
+    }
 }
