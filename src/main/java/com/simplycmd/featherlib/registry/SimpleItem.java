@@ -1,6 +1,7 @@
 package com.simplycmd.featherlib.registry;
 
 import net.minecraft.item.Item;
+import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -23,6 +24,10 @@ public class SimpleItem {
 
     public SimpleItem defaultItemModel() {
         Resources.textureItemModel(this.getItem());
+        return this;
+    }
+    public SimpleItem blockItemModel(Block block) {
+        Resources.blockItemModel(block, this.getItem());
         return this;
     }
 }

@@ -52,7 +52,7 @@ public class Resources {
         return model;
     }
 
-    public static JModel blockItemModel(Block block, BlockItem item) {
+    public static JModel blockItemModel(Block block, Item item) {
         final Identifier blockId = Registry.BLOCK.getId(block);
         final Identifier itemId = Registry.ITEM.getId(item);
         final JModel model = JModel.model().parent(blockId.getNamespace() + ":block/" + blockId.getPath()).display(JModel.display()
