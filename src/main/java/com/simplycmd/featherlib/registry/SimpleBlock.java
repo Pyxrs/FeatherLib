@@ -48,14 +48,17 @@ public class SimpleBlock {
                 break;
             case BLOCK:
                 Resources.blockItemModel(this.getBlock(), this.getItem().get());
+                break;
             case ITEM:
                 Resources.textureItemModel(this.getItem().get());
+                break;
         }
         switch (table) {
             case NONE:
                 break;
             case DEFAULT:
                 Resources.defaultBlockLootTable(this.getBlock(), this.getItem().get());
+                break;
         }
         return this;
     }
@@ -67,8 +70,10 @@ public class SimpleBlock {
                 break;
             case BLOCK:
                 Resources.blockItemModel(this.getBlock(), this.getItem().get());
+                break;
             case ITEM:
                 Resources.textureItemModel(this.getItem().get());
+                break;
         }
         return this;
     }
@@ -80,6 +85,7 @@ public class SimpleBlock {
                 break;
             case DEFAULT:
                 Resources.defaultBlockLootTable(this.getBlock(), this.getItem().get());
+                break;
         }
         return this;
     }
