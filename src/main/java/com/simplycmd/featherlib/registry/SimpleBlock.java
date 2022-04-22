@@ -1,102 +1,56 @@
 package com.simplycmd.featherlib.registry;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
+
+import lombok.Getter;
 import net.minecraft.block.Block;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class SimpleBlock {
-    private final Block block;
+public class SimpleBlock implements ItemConvertible {
+    @Getter
     private final Identifier id;
+    @Getter
+    private final Block block;
+    private final Optional<Function<Block, BlockItem>> item;
 
-    private Optional<BlockItem> item;
-
+    protected final Optional<BiConsumer<Block, BlockStateModelGenerator>> resources;
+    
     public SimpleBlock(Identifier id, Block block) {
-        this.block = block;
         this.id = id;
+        this.block = block;
+        this.resources = Optional.empty();
         this.item = Optional.empty();
+    }
+    public SimpleBlock(Identifier id, Block block, BiConsumer<Block, BlockStateModelGenerator> resources) {
+        this.id = id;
+        this.block = block;
+        this.resources = Optional.of(resources);
+        this.item = Optional.empty();
+    }
+    public SimpleBlock(Identifier id, Block block, Function<Block, BlockItem> item, Optional<BiConsumer<Block, BlockStateModelGenerator>> resources) {
+        this.id = id;
+        this.block = block;
+        this.resources = resources;
+        this.item = Optional.of(item);
+    }
+
+    protected void register() {
         Registry.register(Registry.BLOCK, id, block);
+        if (item.isPresent())
+            Registry.register(Registry.ITEM, id, item.get().apply(block));
     }
 
-    public Identifier getId() {
-        return id;
-    }
-    public Block getBlock() {
-        return block;
-    }
-    public Optional<BlockItem> getItem() {
-        return item;
-    }
-
-    public enum ItemModel {
-        NONE,
-        BLOCK,
-        ITEM,
-    }
-    public enum LootTable {
-        NONE,
-        DEFAULT,
-    }
-
-    public SimpleBlock withItem(ItemModel model, LootTable table, Function<Block, BlockItem> item) {
-        this.item = Optional.of(item.apply(block));
-        Registry.register(Registry.ITEM, id, this.item.get());
-        switch (model) {
-            case NONE:
-                break;
-            case BLOCK:
-                Resources.blockItemModel(this.getBlock(), this.getItem().get());
-                break;
-            case ITEM:
-                Resources.textureItemModel(this.getItem().get());
-                break;
-        }
-        switch (table) {
-            case NONE:
-                break;
-            case DEFAULT:
-                Resources.defaultBlockLootTable(this.getBlock(), this.getItem().get());
-                break;
-        }
-        return this;
-    }
-    public SimpleBlock withItem(ItemModel model, Function<Block, BlockItem> item) {
-        this.item = Optional.of(item.apply(block));
-        Registry.register(Registry.ITEM, id, this.item.get());
-        switch (model) {
-            case NONE:
-                break;
-            case BLOCK:
-                Resources.blockItemModel(this.getBlock(), this.getItem().get());
-                break;
-            case ITEM:
-                Resources.textureItemModel(this.getItem().get());
-                break;
-        }
-        return this;
-    }
-    public SimpleBlock withItem(LootTable table, Function<Block, BlockItem> item) {
-        this.item = Optional.of(item.apply(block));
-        Registry.register(Registry.ITEM, id, this.item.get());
-        switch (table) {
-            case NONE:
-                break;
-            case DEFAULT:
-                Resources.defaultBlockLootTable(this.getBlock(), this.getItem().get());
-                break;
-        }
-        return this;
-    }
-    public SimpleBlock withItem(Function<Block, BlockItem> item) {
-        this.item = Optional.of(item.apply(block));
-        Registry.register(Registry.ITEM, id, this.item.get());
-        return this;
-    }
-
-    public SimpleBlock defaultBlockstate() {
-        Resources.defaultBlockstate(this.getBlock());
-        return this;
+    @Override
+    public Item asItem() {
+        if (item.isPresent())
+            return item.get().apply(block);
+        return block.asItem();
     }
 }

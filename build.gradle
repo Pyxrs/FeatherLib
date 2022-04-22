@@ -22,13 +22,24 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	include modApi("net.devtech:arrp:${project.arrp_version}")
-
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+loom {
+	runs {
+		data {
+			server()
+			name "Data Gen"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated/resources")}"
+			vmArg "-Dfabric-api.datagen.modid=featherlib"
+			ideConfigGenerated = true
+		}
+	}
 }
 
 processResources {
@@ -72,4 +83,8 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+sourceSets.main.resources {
+	srcDirs = ['src/main/resources', 'src/main/generated/resources']
 }
