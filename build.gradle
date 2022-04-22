@@ -88,3 +88,5 @@ publishing {
 sourceSets.main.resources {
 	srcDirs = ['src/main/resources', 'src/main/generated/resources']
 }
+
+assemble.dependsOn runData
