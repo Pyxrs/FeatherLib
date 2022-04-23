@@ -1,6 +1,7 @@
 package com.simplycmd.featherlib.registry;
 
 import com.simplycmd.featherlib.FeatherLib;
+import com.simplycmd.featherlib.registry.data.BetterBlockStateModelGenerator;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -24,7 +25,7 @@ public class SimpleRegistry implements DataGeneratorEntrypoint, ModInitializer {
         fabricDataGenerator.addProvider(new FabricModelProvider(fabricDataGenerator) {
             @Override
             public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-                for (var block : blocks) block.resources.ifPresent((resources) -> resources.accept(block.getBlock(), blockStateModelGenerator));
+                for (var block : blocks) block.resources.ifPresent((resources) -> resources.accept(block.getBlock(), new BetterBlockStateModelGenerator(blockStateModelGenerator.blockStateCollector, blockStateModelGenerator.modelCollector, (item) -> {})));
             }
 
             @Override

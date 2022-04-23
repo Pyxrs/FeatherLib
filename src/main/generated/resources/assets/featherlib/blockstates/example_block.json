@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "": {
-      "model": "featherlib:block/example_block"
-    }
-  }
-}

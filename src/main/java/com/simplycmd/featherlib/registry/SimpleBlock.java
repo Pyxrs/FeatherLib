@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import com.simplycmd.featherlib.registry.data.BetterBlockStateModelGenerator;
+
 import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -20,7 +22,7 @@ public class SimpleBlock implements ItemConvertible {
     private final Block block;
     private final Optional<Function<Block, BlockItem>> item;
 
-    protected final Optional<BiConsumer<Block, BlockStateModelGenerator>> resources;
+    protected final Optional<BiConsumer<Block, BetterBlockStateModelGenerator>> resources;
     
     public SimpleBlock(Identifier id, Block block) {
         this.id = id;
@@ -28,19 +30,24 @@ public class SimpleBlock implements ItemConvertible {
         this.resources = Optional.empty();
         this.item = Optional.empty();
     }
-    public SimpleBlock(Identifier id, Block block, BiConsumer<Block, BlockStateModelGenerator> resources) {
+    public SimpleBlock(Identifier id, Block block, BiConsumer<Block, BetterBlockStateModelGenerator> resources) {
         this.id = id;
         this.block = block;
         this.resources = Optional.of(resources);
         this.item = Optional.empty();
     }
-    public SimpleBlock(Identifier id, Block block, Function<Block, BlockItem> item, Optional<BiConsumer<Block, BlockStateModelGenerator>> resources) {
+    public SimpleBlock(Identifier id, Block block, Function<Block, BlockItem> item) {
         this.id = id;
         this.block = block;
-        this.resources = resources;
+        this.resources = Optional.empty();
         this.item = Optional.of(item);
     }
-
+    public SimpleBlock(Identifier id, Block block, Function<Block, BlockItem> item, BiConsumer<Block, BetterBlockStateModelGenerator> resources) {
+        this.id = id;
+        this.block = block;
+        this.resources = Optional.of(resources);
+        this.item = Optional.of(item);
+    }
     protected void register() {
         Registry.register(Registry.BLOCK, id, block);
         if (item.isPresent())

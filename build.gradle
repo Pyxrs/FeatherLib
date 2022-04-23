@@ -35,7 +35,7 @@ loom {
 			server()
 			name "Data Gen"
 			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated/resources")}"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/resources/generated/")}"
 			vmArg "-Dfabric-api.datagen.modid=featherlib"
 			ideConfigGenerated = true
 		}
@@ -68,7 +68,6 @@ jar {
 	}
 }
 
-// configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
@@ -76,17 +75,14 @@ publishing {
 		}
 	}
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }
 
 sourceSets.main.resources {
-	srcDirs = ['src/main/resources', 'src/main/generated/resources']
+	srcDirs = ['src/main/resources', 'src/main/resources/generated']
 }
 
 assemble.dependsOn runData
+runClient.dependsOn runData
+build.dependsOn runData
