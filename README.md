@@ -2,30 +2,11 @@
 
 Some helpful code for Fabric mods
 
-Mods that use FeatherLib:
+Mods I use FeatherLib for:
 - [Terracraft](https://github.com/SimplyCmd/Terracraft)
-- [The Fabricated Project](https://github.com/SimplyCmd?tab=repositories&q=Fabricated&type=&language=&sort=)
+- [Fabricated (source code not public atm)](https://github.com/SimplyCmd/Project-Fabricated)
 - [The Ink Machine](https://github.com/SimplyCmd/The-Ink-Machine)
 - [Quake](https://github.com/SimplyCmd/Quake)
 
-## Adding to your project:
-Add the following to your `build.gradle`:
-```gradle
-repositories {
-    //...
-    maven {
-	url "https://www.cursemaven.com"
-	content { includeGroup "curse.maven" }
-    }
-    maven { url 'https://storage.googleapis.com/devan-maven/' }
-}
-
-dependencies {
-    //...
-    include modImplementation("curse.maven:simplylib-525225:3564452")
-    include modImplementation("net.devtech:arrp:0.5.3")
-}
-```
-
-## Documentation:
-Please see the [wiki](https://github.com/SimplyCmd/FeatherLib/wiki) for information on how to use this library.
+## Getting started
+Visit the [wiki](https://github.com/SimplyCmd/FeatherLib/wiki) for information on how to use this library.
