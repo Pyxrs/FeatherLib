@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.11-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,7 +11,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	mavenCentral()
 	maven { url = uri("https://storage.googleapis.com/devan-maven/") }
 }
 
@@ -27,19 +26,12 @@ dependencies {
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
-}
 
-loom {
-	runs {
-		data {
-			server()
-			name "Data Gen"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/resources/generated/")}"
-			vmArg "-Dfabric-api.datagen.modid=featherlib"
-			ideConfigGenerated = true
-		}
-	}
+	include modImplementation("net.devtech:arrp:0.+")
+	include modImplementation("org.atteo.classindex:classindex:3.4")
+
+	//compile('org.atteo.classindex:classindex:3.4')
+	annotationProcessor 'org.atteo.classindex:classindex:3.4'
 }
 
 processResources {
@@ -51,14 +43,10 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	it.options.release = 17
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 }
 
@@ -78,11 +66,3 @@ publishing {
 	repositories {
 	}
 }
-
-sourceSets.main.resources {
-	srcDirs = ['src/main/resources', 'src/main/resources/generated']
-}
-
-assemble.dependsOn runData
-runClient.dependsOn runData
-build.dependsOn runData

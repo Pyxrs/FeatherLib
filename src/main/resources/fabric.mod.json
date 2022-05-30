@@ -20,13 +20,10 @@
   "entrypoints": {
     "main": [
       "com.simplycmd.featherlib.FeatherLib",
-      "com.simplycmd.featherlib.registry.ExampleRegistry"
+      "com.simplycmd.featherlib.registry.RegistryHandler"
     ],
     "client": [
       "com.simplycmd.featherlib.FeatherLib"
-    ],
-    "fabric-datagen": [
-      "com.simplycmd.featherlib.registry.ExampleRegistry"
     ]
   },
   "mixins": [
