@@ -28,7 +28,7 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 	include modApi("net.devtech:arrp:0.+")
-	include modImplementation("org.atteo.classindex:classindex:3.4")
+	include modApi("org.atteo.classindex:classindex:3.4")
 
 	annotationProcessor 'org.atteo.classindex:classindex:3.4'
 }
