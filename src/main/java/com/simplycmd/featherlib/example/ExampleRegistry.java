@@ -26,6 +26,4 @@ public class ExampleRegistry {
     public static final Torch EXAMPLE_TORCH = new Torch(ParticleTypes.SOUL_FIRE_FLAME, JIngredient.ingredient().item(Items.APPLE));
 
     public static final Item EXAMPLE_ITEM = new Item(new FabricItemSettings().group(net.minecraft.item.ItemGroup.MATERIALS));
-
-    
 }

@@ -21,16 +21,16 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	compileOnly 'org.projectlombok:lombok:1.18.20'
-	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	compileOnly("org.projectlombok:lombok:${project.lombok_version}")
+	annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
-	testCompileOnly 'org.projectlombok:lombok:1.18.20'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+	testCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
+	testAnnotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
-	include modApi("net.devtech:arrp:0.+")
-	include modApi("org.atteo.classindex:classindex:3.4")
+	include modImplementation("net.devtech:arrp:${project.arrp_version}")
 
-	annotationProcessor 'org.atteo.classindex:classindex:3.4'
+	include modImplementation("org.atteo.classindex:classindex:${project.classindex_version}")
+	annotationProcessor("org.atteo.classindex:classindex:${project.classindex_version}")
 }
 
 processResources {

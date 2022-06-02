@@ -9,7 +9,6 @@ import org.atteo.classindex.IndexAnnotated;
 import org.atteo.classindex.IndexSubclasses;
 
 import lombok.Getter;
-import net.minecraft.util.Rarity;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
