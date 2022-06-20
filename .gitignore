@@ -32,7 +32,3 @@ bin/
 
 run/
 src/main/resources/generated
-
-# featherlib
-
-libs/
