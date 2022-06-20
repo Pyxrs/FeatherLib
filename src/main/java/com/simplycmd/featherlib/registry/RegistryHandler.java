@@ -100,8 +100,8 @@ public class RegistryHandler implements ModInitializer {
 
             // BlockItem & Render annotation handler
             if (value instanceof Block || value instanceof Torch) {
-                if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-                    final var render = (com.simplycmd.featherlib.registry.Render) field.getAnnotation(com.simplycmd.featherlib.registry.Render.class);
+                if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT && field.isAnnotationPresent(Render.class)) {
+                    final var render = (Render) field.getAnnotation(Render.class);
                     if (value instanceof Torch) {
                         BlockRenderLayerMap.INSTANCE.putBlock(((Torch) value).torchBlock, render.layer().getLayer());
                         BlockRenderLayerMap.INSTANCE.putBlock(((Torch) value).wallTorchBlock, render.layer().getLayer());

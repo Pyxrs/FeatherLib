@@ -1,12 +1,15 @@
 package com.simplycmd.featherlib.scheduler;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+@Environment(EnvType.CLIENT)
 public class ClientScheduler implements ClientModInitializer {
     private static HashMap<UUID, SchedulerInfoContainer> tasks = new HashMap<>();
     
