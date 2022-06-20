@@ -1,7 +1,7 @@
-<p align="center">
-  <img src="https://i.imgur.com/h5U7odw.png" width="200" height="200" />
-  <center><h1>FeatherLib</h1></center>
-</p>
+<img src="https://i.imgur.com/h5U7odw.png" width="200" height="200" />
+
+# FeatherLib
+
 
 Some helpful code for Fabric mods
 
