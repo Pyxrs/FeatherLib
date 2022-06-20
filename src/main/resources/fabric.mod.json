@@ -19,11 +19,15 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.simplycmd.featherlib.FeatherLib",
+      "com.simplycmd.featherlib.scheduler.ServerScheduler",
       "com.simplycmd.featherlib.registry.RegistryHandler"
     ],
     "client": [
-      "com.simplycmd.featherlib.FeatherLib"
+      "com.simplycmd.featherlib.scheduler.ClientScheduler",
+      "com.simplycmd.featherlib.example.ExampleScheduler"
+    ],
+    "registry": [
+      "com.simplycmd.featherlib.example.ExampleRegistry"
     ]
   },
   "mixins": [
@@ -33,9 +37,9 @@
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": ">=17",
-    "advanced_runtime_resource_pack": "*"
+    "better_runtime_resource_pack": "*"
   },
   "suggests": {
   }

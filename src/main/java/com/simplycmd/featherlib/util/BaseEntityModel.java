@@ -11,6 +11,9 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 
+/**
+ * Simplified version of {@link net.minecraft.client.render.entity.model.EntityModel}
+ */
 @Environment(EnvType.CLIENT)
 public abstract class BaseEntityModel extends EntityModel<Entity> {
     protected ModelPart base;

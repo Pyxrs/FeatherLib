@@ -1,6 +1,8 @@
 package com.simplycmd.featherlib.scheduler;
 
 import lombok.Getter;
+
+import java.util.UUID;
 import java.util.function.Consumer;
 
 public class SchedulerInfoContainer {
@@ -8,11 +10,11 @@ public class SchedulerInfoContainer {
     private final int maxTicks;
 
     @Getter
-    private final Consumer<Integer> action;
+    private final Consumer<UUID> action;
 
     int currentTick = 0;
 
-    public SchedulerInfoContainer(int maxTicks, Consumer<Integer> action) {
+    public SchedulerInfoContainer(int maxTicks, Consumer<UUID> action) {
         this.maxTicks = maxTicks;
         this.action = action;
     }

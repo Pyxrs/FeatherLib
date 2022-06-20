@@ -1,23 +1,24 @@
 package com.simplycmd.featherlib.scheduler;
 
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Random;
+import java.util.UUID;
 import java.util.function.Consumer;
 
-public class ClientScheduler {
-    private static final Random RANDOM = new Random();
-    private static HashMap<Integer, SchedulerInfoContainer> tasks = new HashMap<>();
-
-    public static void registerEvent() {
+public class ClientScheduler implements ClientModInitializer {
+    private static HashMap<UUID, SchedulerInfoContainer> tasks = new HashMap<>();
+    
+    @Override
+    public void onInitializeClient() {
         ClientTickEvents.END_CLIENT_TICK.register((server) -> onTick());
     }
 
     protected static void onTick() {
-        Iterator<Integer> iterator = tasks.keySet().iterator();
+        Iterator<UUID> iterator = tasks.keySet().iterator();
         while (iterator.hasNext()) {
-            Integer task = iterator.next();
+            UUID task = iterator.next();
             SchedulerInfoContainer container = tasks.get(task);
 
             container.currentTick++;
@@ -29,10 +30,7 @@ public class ClientScheduler {
         }
     }
 
-    public static void schedule(int tickDelay, Consumer<Integer> action) {
-        int id = RANDOM.nextInt();
-        while (tasks.containsKey(id)) id = RANDOM.nextInt();
-
-        tasks.put(id, new SchedulerInfoContainer(tickDelay, action));
+    public static void schedule(int tickDelay, Consumer<UUID> action) {
+        tasks.put(UUID.randomUUID(), new SchedulerInfoContainer(tickDelay, action));
     }
 }

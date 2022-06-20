@@ -9,8 +9,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
+/**
+ * A {@link net.minecraft.util.math.BlockPos} with more context
+ */
 public class SimpleBlockPos extends BlockPos {
-
     @Getter
     @Setter
     BlockState blockState;

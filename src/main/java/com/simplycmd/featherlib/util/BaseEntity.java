@@ -8,6 +8,9 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.world.World;
 
+/**
+ * Simplified version of {@link net.minecraft.entity.Entity}
+ */
 public abstract class BaseEntity extends Entity {
     public BaseEntity(EntityType<?> type, World world) {
         super(type, world);
