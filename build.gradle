@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,7 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	maven { url = uri("https://storage.googleapis.com/devan-maven/") }
+	flatDir { dir "libs" }
 }
 
 dependencies {
@@ -27,10 +27,7 @@ dependencies {
 	testCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
 	testAnnotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
-	include modImplementation("net.devtech:arrp:${project.arrp_version}")
-
-	include modImplementation("org.atteo.classindex:classindex:${project.classindex_version}")
-	annotationProcessor("org.atteo.classindex:classindex:${project.classindex_version}")
+	modImplementation("net.devtech:brrp:${project.rrp_version}")
 }
 
 processResources {

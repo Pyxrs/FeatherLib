@@ -2,6 +2,9 @@ package com.simplycmd.featherlib.util;
 
 import java.util.Arrays;
 
+/**
+ * Not quite as good as Rust but it works
+ */
 public class Tuple {
     final Object[] objects;
 

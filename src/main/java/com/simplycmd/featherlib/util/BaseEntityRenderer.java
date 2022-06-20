@@ -12,6 +12,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
+/**
+ * Simplified version of {@link net.minecraft.client.render.entity.EntityRenderer}
+ */
 @Environment(EnvType.CLIENT)
 public abstract class BaseEntityRenderer extends EntityRenderer<Entity> {
     private static Identifier TEXTURE;
