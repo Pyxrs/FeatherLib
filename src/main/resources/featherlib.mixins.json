@@ -4,6 +4,7 @@
   "package": "com.simplycmd.featherlib.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "FluidCollisionMixin"
   ],
   "client": [
   ],

@@ -15,7 +15,7 @@ public class ClientScheduler implements ClientModInitializer {
     
     @Override
     public void onInitializeClient() {
-        ClientTickEvents.END_CLIENT_TICK.register((server) -> onTick());
+        ClientTickEvents.END_CLIENT_TICK.register((client) -> onTick());
     }
 
     protected static void onTick() {
