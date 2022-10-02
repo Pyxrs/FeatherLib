@@ -20,7 +20,8 @@
   "entrypoints": {
     "main": [
       "com.simplycmd.featherlib.scheduler.ServerScheduler",
-      "com.simplycmd.featherlib.registry.RegistryHandler"
+      "com.simplycmd.featherlib.registry.RegistryHandler",
+      "com.simplycmd.featherlib.util.Util"
     ],
     "client": [
       "com.simplycmd.featherlib.scheduler.ClientScheduler",

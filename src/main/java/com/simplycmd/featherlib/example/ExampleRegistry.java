@@ -5,6 +5,7 @@ import com.simplycmd.featherlib.registry.Lang;
 import com.simplycmd.featherlib.registry.Registry;
 import com.simplycmd.featherlib.registry.Render;
 import com.simplycmd.featherlib.registry.BlockItem.ItemGroup;
+import com.simplycmd.featherlib.registry.RegistryHandler.Sound;
 import com.simplycmd.featherlib.registry.RegistryHandler.Torch;
 import com.simplycmd.featherlib.registry.Render.RenderLayer;
 
@@ -20,11 +21,11 @@ import net.minecraft.particle.ParticleTypes;
 /**
  * @see Registry
  */
-@Registry(modId = "featherlib", devOnly = true)
+@Registry(modId = "featherlib", devOnly = true, debug = true)
 public class ExampleRegistry {
     @Lang(lang = "en_us", name = "Example Block (Development Environment Only)")
     @BlockItem(maxCount = 23, group = ItemGroup.DECORATIONS)
-    public static final Block EXAMPLE_BLOCK = new Block(FabricBlockSettings.of(Material.STONE));
+    public static final Block EXAMPLE_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).slipperiness(1.5F));
 
     @Lang(lang = "en_us", name = "Example Torch (Development Environment Only)")
     @Render(layer = RenderLayer.CUTOUT)
@@ -32,4 +33,7 @@ public class ExampleRegistry {
 
     @Lang(lang = "en_us", name = "Example Item (Development Environment Only)")
     public static final Item EXAMPLE_ITEM = new Item(new FabricItemSettings().group(net.minecraft.item.ItemGroup.MATERIALS));
+
+    @Lang(lang = "en_us", name = "Example Sound (Development Environment Only)")
+    public static final Sound EXAMPLE_SOUND = new Sound();
 }

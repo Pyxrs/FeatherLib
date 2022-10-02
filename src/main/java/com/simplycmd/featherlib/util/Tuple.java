@@ -1,35 +1,68 @@
 package com.simplycmd.featherlib.util;
 
-import java.util.Arrays;
-
 /**
- * Not quite as good as Rust but it works
+ * Not quite as good as Rust but it works.
  */
 public class Tuple {
-    final Object[] objects;
+    public static class Bi<A, B> {
+        public A a;
+        public B b;
 
-    public Tuple(Object... objects) {
-        this.objects = objects;
+        public Bi(A a, B b) {
+            this.a = a;
+            this.b = b;
+        }
     }
 
-    public Object[] gets() {
-        return objects;
+    public static class Tri<A, B, C> {
+        public A a;
+        public B b;
+        public C c;
+
+        public Tri(A a, B b, C c) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+        }
     }
 
-    public Object get(int index) {
-        return objects[index];
+    public static class Quad<A, B, C, D> {
+        public A a;
+        public B b;
+        public C c;
+        public D d;
+
+        public Quad(A a, B b, C c, D d) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+            this.d = d;
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Tuple)) return false;
-        Tuple tuple = (Tuple) o;
-        return Arrays.equals(objects, tuple.objects);
-    }
+    public static class Unlimited {
+        private Object[] objects;
 
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(objects);
+        public Unlimited(Object... objects) {
+            this.objects = objects;
+        }
+
+        public <T> T get(Class<T> cast, int index) {
+            return cast.cast(objects[index]);
+        }
+        public <T> T v(Class<T> cast, int index) {
+            return get(cast, index);
+        }
+
+        public Object getRaw(int index) {
+            return objects[index];
+        }
+        public Object vr(int index) {
+            return getRaw(index);
+        }
+
+        public Object[] getAll() {
+            return objects;
+        }
     }
 }

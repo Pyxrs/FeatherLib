@@ -1,13 +1,20 @@
 package com.simplycmd.featherlib.util;
 
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.client.texture.NativeImage;
+import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.ScoreboardCriterionArgumentType;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.scoreboard.ScoreboardCriterion;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.stat.Stat;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Util {
+public class Util implements ModInitializer {
 	
 	// TODO: registerFeature
 
@@ -96,5 +103,40 @@ public class Util {
 			list.add(line);
 		}
 		return list;
+	}
+
+	@Override
+	public void onInitialize() {
+		CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) -> {
+            dispatcher.register(CommandManager.literal("statistic")
+			.then(CommandManager.argument("player", EntityArgumentType.player())
+			.then(CommandManager.argument("type", ScoreboardCriterionArgumentType.scoreboardCriterion())
+			.executes(context -> {
+                var player = EntityArgumentType.getPlayer(context, "player");
+				var type = ScoreboardCriterionArgumentType.getCriterion(context, "type");
+				if (
+					type.equals(ScoreboardCriterion.AIR) ||
+					type.equals(ScoreboardCriterion.ARMOR) ||
+					type.equals(ScoreboardCriterion.DEATH_COUNT) ||
+					type.equals(ScoreboardCriterion.DUMMY) ||
+					type.equals(ScoreboardCriterion.FOOD) ||
+					type.equals(ScoreboardCriterion.HEALTH) ||
+					type.equals(ScoreboardCriterion.KILLED_BY_TEAMS) ||
+					type.equals(ScoreboardCriterion.LEVEL) ||
+					type.equals(ScoreboardCriterion.PLAYER_KILL_COUNT) ||
+					type.equals(ScoreboardCriterion.TEAM_KILLS) ||
+					type.equals(ScoreboardCriterion.TOTAL_KILL_COUNT) ||
+					type.equals(ScoreboardCriterion.TRIGGER) ||
+					type.equals(ScoreboardCriterion.XP)
+				) {
+					context.getSource().sendError(Text.literal("Not a supported statistic type! Try something else."));
+					return 0;
+				} else {
+					var result = player.getStatHandler().getStat((Stat<?>) type);
+					context.getSource().sendFeedback(Text.literal(player.getDisplayName().getString() + "'s ").append(Text.translatable(type.getName())).append(Text.literal(" statistic is " + result)), false);
+					return 1;
+				}
+            }))));
+        });
 	}
 }
